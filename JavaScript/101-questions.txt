@@ -1,0 +1,281 @@
+1) The Object.create() method create a new object, using an existing object
+to provide the newly created object's __proto__ . (see browser console for visual evidence.)
+
+var Employee = {
+  company: 'xyz'
+}
+
+var emp1 = Object.create(Employee)
+
+// emp1 is empty but the __proto__ has company: 'xyz'
+
+delete emp1.company // this won't work because delete does not remove properties from prototype
+
+// Usually use it like
+Rectangle.prototype = Object.create(Shape.prototype)
+
+2)
+var trees = ["redwood","bay","cedar","oak","maple"];
+delete trees[3]; // removes but leaves a hole in the array
+
+// ["redwood", "bay", "cedar", undefined × 1, "maple"]
+// Removes an element from array and leaves it uninitialized
+// Chrome displays undefined x 1, Firefox has it undefined
+
+3) A general guideline for addition operators
+Number + Number -> Addition
+Boolean + Number -> Addition
+Number + String -> Concatenation
+String + Boolean -> Concatenation
+String + String -> Concatenation
+
+4) y = z = typeof y;
+   console.log(y);
+
+   // undefined
+   // the associativity of the assignment operator is Right to Left <=
+
+5)
+var foo = function bar() { return 12; };
+typeof bar();
+
+// Reference Error
+// bar is not visible outside but bar is visible from within the function
+// use something like
+var bar = function() { return 12; };
+typeof bar();
+
+6)
+var foo = function() {
+  // Some code
+};
+// defined at runtime
+
+function bar() {
+  // Some code
+};
+// defined at parse time and it is hoisted to the top
+
+7)
+function foo() {
+	return foo;
+}
+new foo() instanceof foo;
+
+// false because new foo() returns foo which points to function foo
+
+8) Array.prototype.slice()
+The slice() method returns a shallow copy of a portion of an array
+into a new array object selected from begin to end (end not included).
+The original array will not be modified.
+
+9) Associative array
+var counterArray = {
+    A : 3,
+    B : 4
+};
+Object.keys(counterArray).length // Output 2
+
+10) const test = { name: 't1', age: 150 }
+if ('name' in test) { // check for existance of name property in test
+  ...
+}
+
+11) Array.prototype.splice mutated the underlying array!!!!
+let arr = [5, 6, 8]
+arr.splice(2, 1, 11); // arr = [5, 6, 11]
+arr.splice(2, 1);     // arr = [5, 6]
+arr.splice(1, 0, 11); // arr = [5, 11, 6, 8]
+
+12) substring
+const test = 'Tumen'
+console.log(test.substring(0, 2)); // Tu, not including the endIndex
+console.log(test.substring(test.length - 2)) // get last 2 characters
+
+13) delete a char at index n from string
+const str = s.split('').filter((v, index) => index !== n).join('')
+
+14) Removes all special characters from a given string
+console.log("A man, a plan, a canal: Panama".replace(/[^\w]/g ,'')); // AmanaplanacanalPanama
+
+15) Combinations of all three characters using 3 nested for loops
+const arr = [5, 16, 2, 4, 7, 8, 12]
+
+for (let i = 0; i < arr.length - 2; i++) {
+  for (let j = i + 1; j < arr.length - 1; j++) {
+    for (let k = j + 1; k < arr.length; k++) {
+      console.log(arr[i], arr[j], arr[k])
+    }
+  }
+}
+
+16) (function() {
+      var a = b = 5;
+    })();
+
+    console.log(b);
+    // 5 because var a is scoped to the function but b is scoped globally. To prevent this, `use strict`
+
+(function() {
+  'use strict';
+
+  var a = b = 5;
+})();
+
+17)
+// Check to make sure you don't override the existing function on the String object
+// Be aware of the prototype property and understand inheritance
+// When this is called, make sure this represents the value
+
+String.prototype.repeatify = String.prototype.repeatify || function(times) {
+   var str = '';
+
+   for (var i = 0; i < times; i++) {
+      str += this;
+   }
+
+   return str;
+};
+
+18)
+// variable declaration is hoisted but not initialized
+// function foo is also hoisted to the top
+function test() {
+   console.log(a);
+   console.log(foo());
+
+   var a = 1;
+   function foo() {
+      return 2;
+   }
+}
+
+test(); // undefined 2
+
+19)
+// Aurelio De Rosa and John Doe
+// this is determined based on how the function is invoked
+var fullname = 'John Doe';
+var obj = {
+   fullname: 'Colin Ihrig',
+   prop: {
+      fullname: 'Aurelio De Rosa',
+      getFullname: function() {
+         return this.fullname;
+      }
+   }
+};
+
+console.log(obj.prop.getFullname()); // Aurelio De Rosa -> context is the prop object
+
+var test = obj.prop.getFullname; // John Doe -> context is the global window object
+
+console.log(test()); // John Doe
+console.log(test.call(obj.prop)); // Aurelio De Rosa -> forces the context to be obj.prop
+
+20) Difference between call and apply
+
+func.call(thisContext, arg1, arg2, ...)
+func.apply(thisContext, [arg1, arg2, ...])
+
+21) The Array.from() method creates a new Array instance from an array-like or iterable object.
+console.log(Array.from('foo'));
+// expected output: Array ["f", "o", "o"]
+
+22) Use spread operator in Math.min and Math.max functions
+let numbers = [9, 4, 7, 1];
+Math.min(...numbers); // 1
+Math.max(...numbers); // 9
+
+23) Destructuring fun
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
+console.log(x); // 1
+console.log(y); // 2
+console.log(z); // { a: 3, b: 4 }
+
+24) object function
+function object(o) {
+  function F() { }
+  F.prototype = o
+  return new F()
+}
+const newObject = object(oldObject)
+
+25) isInteger(x) { return Math.round(x) === x }
+    isInteger(x) { return (x ^ 0) === x }
+
+26) console.log(sum(2,3));   // Outputs 5
+    console.log(sum(2)(3));  // Outputs 5
+
+    function sum(n1) {
+      const n2 = arguments[1]
+
+      if (n2) return n1 + n2
+
+      return (n2) => n1 + n2
+    }
+
+27) Iterate through a matrix. A matrix is a 2 dimensional array.
+
+// row => 0 - n, col => 0 - n
+function iterate(matrix) {
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      console.log(matrix[row][col])
+      ...
+    }
+  }
+}
+
+// row => 0 - n, col => n - 0
+function iterate(matrix) {
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = matrix[row].length - 1; col >= 0; col--) {
+      console.log(matrix[row][col])
+      ...
+    }
+  }
+}
+
+28) Array(4).join('0') // 000
+29)
+var ninja = {
+  yell: function(n) {
+    return n > 0 ? arguments.callee(n-1) + "a" : "hiy";
+  }
+};
+assert( ninja.yell(4) == "hiyaaaa", "arguments.callee is the function itself." );
+
+30)
+var katana = {
+  isSharp: 'Hello',
+  use1: function() {
+    return this; // refers to the katana object
+  },
+  use2: () => {
+    return this; // refers to the global window object
+  }
+};
+
+31)
+function loop(array, fn) {
+  for (let i = 0; i < array.length; i++) {
+    fn.apply(array, [array[i], i]);
+    // fn.call(array, array[i], i);
+  }
+}
+var num = 0;
+loop([0, 1, 2], function(value, i) {
+  assert(value == num++, "Make sure the contents are as we expect it.");
+  assert(this instanceof Array, "The context should be the full array.");
+});
+
+32)
+function User(first, last) {
+  if (!(this instanceof User))
+    return new User(first, last);
+
+  this.name = first + " " + last;
+}
+const user1 = new User('T1', 'T2')
+const user2 = User('S1', 'S2')

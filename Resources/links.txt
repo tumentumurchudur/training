@@ -1,0 +1,15 @@
+Links our engineers found helpful:
+
+101 Javascript Questions: http://blog.canumeet.com/2016/09/16/101-javascript-interview-question/
+
+Helpful Examples: http://www.sitepoint.com/5-typical-javascript-interview-exercises/
+
+Learn JavaScript | MDN: https://developer.mozilla.org/en-US/Learn/JavaScript
+
+Video: Douglas Crockford, "Advanced JavaScript:" https://www.youtube.com/watch?v=DwYPG6vreJg
+
+Eloquent JavaScript: http://eloquentjavascript.net/
+
+Learning Advanced JavaScript: http://ejohn.org/apps/learn/
+
+JavaScript Garden: http://bonsaiden.github.io/JavaScript-Garden/

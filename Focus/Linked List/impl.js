@@ -1,0 +1,14 @@
+// Implement queue using stack
+class Queue {
+  constructor() {
+    this.data = []
+  }
+
+  add(record) {
+    this.data.unshift(record)
+  }
+
+  remove() {
+    return this.data.pop()
+  }
+}
