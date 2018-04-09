@@ -279,3 +279,16 @@ function User(first, last) {
 }
 const user1 = new User('T1', 'T2')
 const user2 = User('S1', 'S2')
+
+33)
+// object.constructor is a reference to the function that creates this object.
+function Ninja(){}
+
+var ninja = new Ninja();
+
+// We can just use the constructor since it is a function reference.
+var ninjaB = new ninja.constructor();
+
+assert( typeof ninja == "object", "However the type of the instance is still an object." );
+assert( ninja instanceof Ninja, "The object was instantiated properly." );
+assert( ninja.constructor == Ninja, "The ninja object was created by the Ninja function." );
