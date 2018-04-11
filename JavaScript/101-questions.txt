@@ -292,3 +292,35 @@ var ninjaB = new ninja.constructor();
 assert( typeof ninja == "object", "However the type of the instance is still an object." );
 assert( ninja instanceof Ninja, "The object was instantiated properly." );
 assert( ninja.constructor == Ninja, "The ninja object was created by the Ninja function." );
+
+34)
+Difference between mergeMap and switchMap
+----------------------------------------------------------------------------------------------
+When you hear the word merge, think – use everything on all the streams aka. merge everything.
+Whereas when you hear the word switch, think – switch to using data on the newer stream.
+----------------------------------------------------------------------------------------------
+
+var outer = Rx.Observable.interval(1000).take(2);
+
+// 0:0
+// 0:1
+// 1:0
+// 0:2
+// 1:1
+// 1:2
+// merges outputs of all streams
+var source = outer.mergeMap(function (x) {
+  return Rx.Observable.interval(500).take(3).map(y => `${x}:${y}`)
+});
+
+// 0:0
+// 0:1
+// 1:0
+// 1:1
+// 1:2
+// switch to the newest stream and unsubscribes from the previous stream.
+var source = outer.switchMap(function (x) {
+  return Rx.Observable.interval(500).take(3).map(y => `${x}:${y}`)
+});
+
+source.subscribe(d => console.log(d));
