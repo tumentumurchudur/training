@@ -7,14 +7,16 @@ class Emitter {
         const callbacks = this.getCallbacks().filter(cb => cb.event !== this.event);
 
         this.setCallbacks(callbacks);
-      },
-      getCallbacks: () => {
-        return this.callbacks
-      },
-      setCallbacks: (callbacks) => {
-        this.callbacks = callbacks
       }
-    };
+    }
+  }
+
+  getCallbacks() {
+    return this.callbacks
+  }
+
+  setCallbacks(callbacks) {
+    this.callbacks = callbacks
   }
 
   subscribe(event, callback) {
@@ -31,7 +33,7 @@ class Emitter {
       }
     }
   }
-}
+};
 
 const myEmitter = new Emitter();
 const sub = myEmitter.subscribe('event-1', function(arg1, arg2, arg3) {
@@ -40,5 +42,3 @@ const sub = myEmitter.subscribe('event-1', function(arg1, arg2, arg3) {
 myEmitter.emit('event-1', 'foo1', 100, 200);
 sub.release();
 myEmitter.emit('event-1', 'foo2', 300, 400);
-
-

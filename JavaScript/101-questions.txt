@@ -14,6 +14,9 @@ delete emp1.company // this won't work because delete does not remove properties
 // Usually use it like
 Rectangle.prototype = Object.create(Shape.prototype)
 
+// Most commonly used like this
+Rectangle.prototype = new Shape()
+
 2)
 var trees = ["redwood","bay","cedar","oak","maple"];
 delete trees[3]; // removes but leaves a hole in the array
@@ -324,3 +327,21 @@ var source = outer.switchMap(function (x) {
 });
 
 source.subscribe(d => console.log(d));
+
+35) RxJs => share() operators
+
+Allows Observable to be shared amongs its observers.
+
+//emit value in 1s
+const source = Rx.Observable.timer(1000)
+//log side effect, emit result
+const example = source
+  .do(() => console.log('***SIDE EFFECT***'))
+  .map(() => console.log('mapping'))
+  .map(() => [1, 56, 152, 6, 0])
+  .map(data => data.filter(d => d > 50))
+  .share() // side effects will execute only once since share() operator is used.
+
+const subscribe = example.subscribe(val => console.log('1', val))
+const subscribeTwo = example.subscribe(val => console.log('2', val))
+
