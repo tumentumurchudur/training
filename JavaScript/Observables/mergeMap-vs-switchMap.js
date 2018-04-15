@@ -11,13 +11,15 @@ var source = outer.switchMap(function (x) {
 
 source.subscribe(d => console.log(d));
 
-// Marble Diagram (mergeMap)
+// Marble Diagram
 /*
 source: -0-------1|
           \       \
 inner2:    \       0---1---2|
             \
 inner1:      0---1---2|
+
+    mergeMap()
 
 output: -----x---x-x-x-x---x|
 */
