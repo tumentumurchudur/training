@@ -1,3 +1,4 @@
+// https://jsfiddle.net/wqm1e13y/22/
 const source = Rx.Observable.defer(() => Rx.Observable.of(
   Math.floor(Math.random() * 100)
 ));

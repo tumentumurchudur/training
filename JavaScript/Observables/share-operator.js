@@ -1,3 +1,4 @@
+// https://jsfiddle.net/Lmesxxaq/160/
 //emit value in 1s
 const source = Rx.Observable.interval(1000).take(1)
 //log side effect, emit result

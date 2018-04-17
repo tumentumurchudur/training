@@ -1,3 +1,4 @@
+// https://jsfiddle.net/41awjgda/415/
 // Difference between mergeMap and switchMap
 var outer = Rx.Observable.interval(1000).take(2);
 

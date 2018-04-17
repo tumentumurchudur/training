@@ -1,4 +1,4 @@
-// Mock service that takes a while to return.
+// https://jsfiddle.net/5o6yca5s/43/
 const service = {
   loadResources: (val) => {
   	return new Promise(resolve => {
@@ -11,8 +11,56 @@ const service = {
 
 Rx.Observable.interval(250)
   .take(4)
-  //.concatMap(val => service.loadResources(val)) // same as mergeMap but the order is preserved
-  //.mergeMap(val => service.loadResources(val))  // merges everything on all streams
-  //.switchMap(val => service.loadResources(val)) // switches on latest stream
-  .exhaustMap(val => service.loadResources(val))  // ignores stream while inner stream is pending. Opposite of switchMap
+  //.mergeMap(val => service.loadResources(val))
+  //.switchMap(val => service.loadResources(val))
+  //.concatMap(val => service.loadResources(val))
+  //.exhaustMap(val => service.loadResources(val))
   .subscribe(result => console.log(result))
+
+  /*
+    mergeMap()
+    source: ----0----1----2----3
+                |    |    |    |
+                |    |    |    -------------------
+                |    |    ----------
+                |    --------------------
+                ----------
+
+            -------------0---------2----1--------3
+  */
+
+  /*
+    switchMap()
+    source: ----0----1----2----3
+                |    |    |    |
+                |    |    |    -------------------
+                |    |    -----
+                |    -----
+                -----
+
+            --------------------------------------3
+  */
+
+  /*
+    concatMap()
+    source: ----0----1----2----3
+                |    |    |    |
+                |    |    |                             -------------------
+                |    |                        ----------
+                |         --------------------
+                ----------
+
+            -------------0--------------------1--------2-------------------3
+  */
+
+  /*
+    exhaustMap()
+    source: ----0----1----2----3
+                |    |    |    |
+                |    |    |
+                |    |    ----------
+                |
+                ----------
+
+            -------------0---------2
+  */
