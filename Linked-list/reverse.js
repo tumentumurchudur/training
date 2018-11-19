@@ -10,16 +10,16 @@ class Node {
 function reverseList(root) {
   let currNode = root;
   let prevNode = null;
+  let nextNode = null;
 
-  while(currNode !== null) {
-    // Point current node to prevous node. Reverse the link
+  while(currNode) {
+    nextNode = currNode.next;
+
     currNode.next = prevNode;
 
-    // Before advancing, point previous node to current node
     prevNode = currNode;
 
-    // Advance to the next node.
-    currNode = currNode.next;
+    currNode = nextNode;
   }
 
   // Return the root node.

@@ -2,25 +2,18 @@ class Emitter {
   constructor() {
     this.callbacks = [];
     this.subscription = {
-      event: null,
+    	event: null,
       release: function() {
-        const callbacks = this.getCallbacks().filter(cb => cb.event !== this.event);
-
-        this.setCallbacks(callbacks);
+ 				this._removeCallback(this.event);
+      },
+      _removeCallback: (event) => {
+        this.callbacks = this.callbacks.filter(cb => cb.event !== event)
       }
     }
   }
 
-  getCallbacks() {
-    return this.callbacks
-  }
-
-  setCallbacks(callbacks) {
-    this.callbacks = callbacks
-  }
-
-  subscribe(event, callback) {
-    this.callbacks.push({ event, callback });
+  subscribe(event, fn) {
+    this.callbacks.push({ event, fn });
 
     return Object.assign({}, this.subscription, { event });
   }
@@ -28,12 +21,12 @@ class Emitter {
   emit(event, ...args) {
     for (const obj of this.callbacks) {
       if (obj.event === event) {
-        obj.callback(...args);
+        obj.fn(...args);
         break;
       }
     }
   }
-};
+}
 
 const myEmitter = new Emitter();
 const sub = myEmitter.subscribe('event-1', function(arg1, arg2, arg3) {

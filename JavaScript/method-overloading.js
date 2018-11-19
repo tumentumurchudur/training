@@ -14,7 +14,13 @@ function addMethod(object, name, fn) {
 }
 
 function Ninja() {
-  let ninjas = ['Brian Hannan', 'Jason Sweat', 'Erick Granados']
+  let ninjas = [
+    'Brian Hannan',
+    'Jason Sweat',
+    'Erick Granados',
+    'Ulziijargal Baatarkhuu',
+    'Ricardo Bustamante'
+  ]
 
   addMethod(this, 'find', function() {
     return ninjas

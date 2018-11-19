@@ -1,5 +1,5 @@
 // This is how bind() function works.
-Function.prototype.bind = function() {
+Function.prototype.bind = Function.prototype.bind || function() {
   const fn = this;
 
   // argument is different from arguments in the inner function!!!
@@ -18,4 +18,3 @@ function add(num1, num2) {
 const obj = { name: 'Nick' };
 const binder = add.bind(obj);
 binder(25, 30);
-

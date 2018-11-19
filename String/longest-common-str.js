@@ -17,7 +17,7 @@
 function findLongestMatch(s1, s2) {
 	const len1 = s1.length
 	const len2 = s2.length
-	const matrix = [][]
+	const matrix = []
 	let result = [] // keep track of longest string
 	let max = 0
 
