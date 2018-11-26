@@ -1,0 +1,57 @@
+<html>
+  <style>
+    :root {
+      font-size: 16px;
+    }
+
+    .parent {
+      font-size: 12px;
+    }
+
+    .example1 {
+      /*
+        em is calculated in relation to the parent font-size. Here it is 12px x 1.5 = 18px.
+        It has a compounding effect where the immediate parent re-defines the font-size and it
+        propogates down.
+      */
+      font-size: 1.5em;
+    }
+
+    .span1 {
+      /*
+        Compounds here, so it is 18px * 2 = 36px because the immediate parent's font-size is
+        1.5 * 12px = 18px and then 18px * 2 = 36px
+      */
+      font-size: 2em;
+
+      /*
+        For everything else like margin, padding, height, width, etc...
+        em is calculated using font-size.
+        Here it is 36px * 1.5 = 54px. So it can be used to add margin based on the font-size.
+      */
+      margin: 1.2em;
+    }
+
+    .example2 {
+      /*
+        rem is used to ignore this compounding effect of em where it is calculated
+        using the root size. Here it is 16px * 2.5 = 40px.
+      */
+      font-size: 2.5rem;
+
+      /*
+        For everything else like margin, padding, height, etc, rem works the same way.
+      */
+      margin: 3rem;
+    }
+  </style>
+  <body class="parent">
+    <div class="example1">
+      Hello World
+      <span class="span1">Test 1</span>
+    </div>
+    <div class="example2">
+      My World
+    </div>
+  </body>
+</html>
