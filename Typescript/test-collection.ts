@@ -5,9 +5,9 @@ import { TestModel } from "./test-model";
  * A collection of @type{TestModel}
  */
 export class TestModels extends ModelCollection<TestModel> {
-    constructor(data: any) {
-        super(TestModel, data);
-    }
+	constructor(data: any) {
+			super(TestModel, data);
+	}
 }
 /*
 

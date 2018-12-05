@@ -23,7 +23,7 @@ function reverse(str) {
   let beg = 0
   let end = str.length - 1
 
-  while (beg <= end) {
+  while (beg < end) {
     const temp = arr[beg]
     arr[beg] = arr[end]
     arr[end] = temp

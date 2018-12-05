@@ -1,0 +1,48 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Modal</title>
+    <style>
+      :root {
+        font-size: 14px; /* 16px is the default. */
+      }
+
+      .backdrop {
+        position: fixed;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal {
+        position: fixed;
+        z-index: 200;
+        top: 40%;
+        left: 40%;
+        width: 20%;
+        background: white;
+        box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+        padding: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="backdrop"></div>
+    <div class="modal">
+      <h1>This is a modal</h1>
+      <div class="modal-input">
+        <textarea rows="3"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel">Cancel</button>
+        <button type="button" class="btn-confirm">Confirm</button>
+      </div>
+    </div>
+  </body>
+</html>

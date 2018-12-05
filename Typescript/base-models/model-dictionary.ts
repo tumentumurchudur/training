@@ -10,13 +10,13 @@ import { IModelConstructor } from "./interfaces";
  * this Array could also then be used to easily create a new Map.
  */
 export abstract class ModelDictionary<T> extends Array<[string, T]> {
-    constructor(model: IModelConstructor<T>, data?: object) {
-        super();
+	constructor(model: IModelConstructor<T>, data?: object) {
+		super();
 
-        if (data) {
-            Object.keys(data).forEach(key => {
-                this.push([key, new model(data[key])]);
-            });
-        }
-    }
+		if (data) {
+				Object.keys(data).forEach(key => {
+						this.push([key, new model(data[key])]);
+				});
+		}
+	}
 }
