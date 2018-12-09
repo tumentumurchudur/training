@@ -15,7 +15,7 @@ class Emitter {
   subscribe(event, fn) {
     this.callbacks.push({ event, fn });
 
-    return Object.assign({}, this.subscription, { event });
+    return { ...this.subscription, event };
   }
 
   emit(event, ...args) {

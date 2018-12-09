@@ -1,13 +1,13 @@
 function solution(S, K) {
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-  const currIndex = days.indexOf(S)
+  const currIndex = days.indexOf(S);
   if (currIndex === -1) {
-   return null
+    return null;
   }
 
-  const advanceIndex = K % 7
-  const total = currIndex + advanceIndex
+  const advanceIndex = K % 7;
+  const total = currIndex + advanceIndex;
 
   if (total < days.length) {
     return days[total]
@@ -15,3 +15,6 @@ function solution(S, K) {
     return days[advanceIndex - (days.length - currIndex)]
   }
 }
+
+console.log(solution('Wed', 23));
+console.log(solution('Sas', 2));

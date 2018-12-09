@@ -1,22 +1,32 @@
 function SimpleLib() {
   const addClass = function(className) {
-    setTimeout(() => {
-      this.element.classList.add(className);
-    }, this.queue.shift() || 0);
+    const delay = this.queue.shift();
 
+    if (delay && delay > 0) {
+      setTimeout(() => {
+        this.element.classList.add(className);
+      }, delay);
+    } else {
+      this.element.classList.add(className);
+    }
     return this;
   }
 
   const removeClass = function(className) {
-    setTimeout(() => {
-      this.element.classList.remove(className);
-    }, this.queue.shift() || 0);
+    const delay = this.queue.shift();
 
+    if (delay && delay > 0) {
+      setTimeout(() => {
+        this.element.classList.remove(className);
+      }, delay);
+    } else {
+      this.element.classList.remove(className);
+    }
     return this;
   }
 
-  const delay = function(d) {
-    this.queue.push(d);
+  const delay = function(delay) {
+    this.queue.push(delay);
     return this;
   }
 
